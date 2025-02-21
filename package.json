@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js",  // Puedes tener un comando dev para desarrollo local si lo necesitas
-    "build": "echo 'No build step required'"  // En proyectos estáticos no necesitas un build
+    "dev": "node index.js",
+    "build": "echo 'No build step required'"
   },
   "dependencies": {
     "nodemailer": "^6.7.2"
