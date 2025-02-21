@@ -3,71 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario Anónimo</title>
+  <title>Denuncias Anónimas - Policía del Chaco</title>
   <style>
+    /* CSS Global */
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+      background-color: #f1f3f4;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
-
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
+    h1, p {
       text-align: center;
-      color: #333;
+      color: #1d1d1d;
+    }
+    
+    /* Contenedor principal */
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Encabezado */
+    header {
+      background-color: #003366;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    header p {
+      font-size: 1.2em;
+    }
+
+    /* Mensaje de tranquilidad */
+    .message {
+      background-color: #e7f5e1;
+      color: #4caf50;
+      border: 1px solid #c5e1a5;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 20px 0;
+      font-size: 1.1em;
+    }
+
+    /* Formulario */
+    form {
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     label {
-      font-size: 16px;
-      margin-bottom: 8px;
       display: block;
-      color: #333;
+      margin-bottom: 10px;
+      font-weight: bold;
     }
 
-    input[type="text"], textarea {
+    input, textarea {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: 1px solid #ddd;
-      border-radius: 4px;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1em;
     }
 
     button {
-      background-color: #4CAF50;
+      background-color: #28a745;
       color: white;
-      padding: 10px 20px;
       border: none;
-      border-radius: 4px;
+      padding: 15px 20px;
+      border-radius: 5px;
+      font-size: 1.2em;
       cursor: pointer;
-      width: 100%;
-      font-size: 16px;
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
-      background-color: #45a049;
+      background-color: #218838;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      header h1 {
+        font-size: 2em;
+      }
+
+      header p {
+        font-size: 1em;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Formulario de Denuncia Anónima</h1>
-    <form action="/submit" method="POST">
-      <label for="asunto">Asunto</label>
-      <input type="text" id="asunto" name="asunto" required>
+    <header>
+      <h1>Policía del Chaco</h1>
+      <p>Formulario de Denuncia Anónima</p>
+    </header>
 
-      <label for="problema">Problema</label>
-      <textarea id="problema" name="problema" required></textarea>
+    <div class="message">
+      <p><strong>Recuerda:</strong> Tu denuncia es completamente anónima. No es necesario que te identifiques. Tu colaboración es esencial para mantener la seguridad en nuestra comunidad.</p>
+    </div>
 
-      <button type="submit">Enviar</button>
+    <form action="https://formspree.io/f/mjvjrpoj" method="POST">
+      <label for="asunto">Asunto de la Denuncia</label>
+      <input type="text" id="asunto" name="asunto" placeholder="Ejemplo: Robo en la vía pública" required>
+
+      <label for="problema">Descripción del Problema</label>
+      <textarea id="problema" name="problema" rows="6" placeholder="Describe brevemente lo ocurrido o la situación que deseas denunciar." required></textarea>
+
+      <button type="submit">Enviar Denuncia</button>
     </form>
   </div>
 </body>
