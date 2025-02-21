@@ -1,56 +1,74 @@
-<!-- /public/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Denuncia Anónima</title>
-    <link rel="stylesheet" href="/styles/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Anónimo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    label {
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: block;
+      color: #333;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Denuncia Anónima</h1>
-        <form id="denunciaForm">
-            <label for="asunto">Asunto</label>
-            <input type="text" id="asunto" name="asunto" required>
+  <div class="container">
+    <h1>Formulario de Denuncia Anónima</h1>
+    <form action="/submit" method="POST">
+      <label for="asunto">Asunto</label>
+      <input type="text" id="asunto" name="asunto" required>
 
-            <label for="problema">Problema</label>
-            <textarea id="problema" name="problema" rows="5" required></textarea>
+      <label for="problema">Problema</label>
+      <textarea id="problema" name="problema" required></textarea>
 
-            <button type="submit">Enviar</button>
-        </form>
-        <p id="responseMessage" style="text-align:center;"></p>
-    </div>
-
-    <script>
-        document.getElementById('denunciaForm').addEventListener('submit', async function(event) {
-            event.preventDefault(); // Evita el envío estándar del formulario
-
-            const asunto = document.getElementById('asunto').value;
-            const problema = document.getElementById('problema').value;
-
-            try {
-                const response = await fetch('/api/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ asunto, problema }),
-                });
-
-                const result = await response.json();
-                const responseMessage = document.getElementById('responseMessage');
-                if (response.ok) {
-                    responseMessage.textContent = result.message;
-                    document.getElementById('denunciaForm').reset();
-                } else {
-                    responseMessage.textContent = result.error || 'Error al enviar la denuncia.';
-                }
-            } catch (error) {
-                console.error(error);
-                document.getElementById('responseMessage').textContent = 'Error de conexión.';
-            }
-        });
-    </script>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
 </body>
 </html>
