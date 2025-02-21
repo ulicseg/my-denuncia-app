@@ -3,136 +3,212 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Denuncias Anónimas - Policía del Chaco</title>
+  <title>Reclamos y Denuncias Anónimas - Policía del Chaco</title>
   <style>
-    /* CSS Global */
-    body {
-      font-family: 'Arial', sans-serif;
-      background-color: #f1f3f4;
+    :root {
+      --primary-color: #003366;
+      --secondary-color: #002145;
+      --accent-color: #28a745;
+      --text-color: #333333;
+      --light-bg: #f8f9fa;
+    }
+
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    h1, p {
-      text-align: center;
-      color: #1d1d1d;
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-color);
+      line-height: 1.6;
     }
-    
-    /* Contenedor principal */
+
     .container {
       width: 100%;
-      max-width: 900px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 20px;
     }
 
-    /* Encabezado */
     header {
-      background-color: #003366;
-      color: #ffffff;
-      padding: 20px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 2rem 0;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .logo-placeholder {
+      width: 100px;
+      height: 100px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .header-text {
       text-align: center;
+    }
+
+    .header-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-text p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .anonymous-notice {
+      background-color: #fff;
+      border-left: 4px solid var(--accent-color);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 2rem;
       border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
+    .form-title {
+      color: var(--primary-color);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #eee;
     }
 
-    header p {
-      font-size: 1.2em;
-    }
-
-    /* Mensaje de tranquilidad */
-    .message {
-      background-color: #e7f5e1;
-      color: #4caf50;
-      border: 1px solid #c5e1a5;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 20px 0;
-      font-size: 1.1em;
-    }
-
-    /* Formulario */
-    form {
-      background-color: #ffffff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .form-group {
+      margin-bottom: 1.5rem;
     }
 
     label {
       display: block;
-      margin-bottom: 10px;
-      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: var(--text-color);
+      font-weight: 600;
     }
 
-    input, textarea {
+    textarea {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      font-size: 1em;
+      min-height: 200px;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
     }
 
-    button {
-      background-color: #28a745;
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(0, 51, 102, 0.1);
+    }
+
+    .submit-button {
+      background-color: var(--accent-color);
       color: white;
       border: none;
-      padding: 15px 20px;
-      border-radius: 5px;
-      font-size: 1.2em;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 4px;
       cursor: pointer;
+      width: 100%;
       transition: background-color 0.3s ease;
     }
 
-    button:hover {
+    .submit-button:hover {
       background-color: #218838;
     }
 
-    /* Responsive */
+    .privacy-notice {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 10px;
       }
 
-      header h1 {
-        font-size: 2em;
+      .header-content {
+        flex-direction: column;
       }
 
-      header p {
-        font-size: 1em;
+      .header-text h1 {
+        font-size: 2rem;
       }
 
-      button {
-        width: 100%;
+      .form-container {
+        padding: 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <h1>Policía del Chaco</h1>
-      <p>Formulario de Denuncia Anónima</p>
-    </header>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo-placeholder">
+          <svg width="50" height="50" viewBox="0 0 24 24" fill="white">
+            <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.5L19 8v8l-7 3.5L5 16V8l7-3.5z"/>
+          </svg>
+        </div>
+        <div class="header-text">
+          <h1>Policía del Chaco</h1>
+          <p>Sistema de Reclamos y Denuncias Anónimas</p>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <div class="message">
-      <p><strong>Recuerda:</strong> Tu denuncia es completamente anónima. No es necesario que te identifiques. Tu colaboración es esencial para mantener la seguridad en nuestra comunidad.</p>
+  <div class="container">
+    <div class="anonymous-notice">
+      <p><strong>IMPORTANTE:</strong> Este sistema está diseñado para garantizar su completo anonimato. No se registra ningún tipo de información personal. Su colaboración es fundamental para mejorar la seguridad de nuestra comunidad.</p>
     </div>
 
-    <form action="https://formspree.io/f/mjkgzbpr" method="POST">
-      <label for="asunto">Asunto de la Denuncia</label>
-      <input type="text" id="asunto" name="asunto" placeholder="Ejemplo: Robo en la vía pública" required>
+    <div class="form-container">
+      <h2 class="form-title">Escribe tu reclamo, inquietud o denuncia</h2>
+      
+      <form action="https://formspree.io/f/mjkgzbpr" method="POST">
+        <div class="form-group">
+          <label for="denuncia">Su reclamo o denuncia:</label>
+          <textarea 
+            id="denuncia" 
+            name="denuncia" 
+            placeholder="Describa los detalles de su reclamo o denuncia. Sea lo más específico posible incluyendo fechas, lugares y cualquier otra información relevante que pueda ayudar en la investigación."
+            required
+          ></textarea>
+        </div>
 
-      <label for="problema">Descripción del Problema</label>
-      <textarea id="problema" name="problema" rows="6" placeholder="Describe brevemente lo ocurrido o la situación que deseas denunciar." required></textarea>
+        <button type="submit" class="submit-button">Enviar Reclamo Anónimo</button>
+      </form>
 
-      <button type="submit">Enviar Denuncia</button>
-    </form>
+      <div class="privacy-notice">
+        <p>Su reclamo será procesado de manera confidencial y anónima por las autoridades correspondientes.</p>
+      </div>
+    </div>
   </div>
 </body>
 </html>
