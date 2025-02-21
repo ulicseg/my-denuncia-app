@@ -24,6 +24,7 @@
       background-color: var(--light-bg);
       color: var(--text-color);
       line-height: 1.6;
+      min-height: 100vh;
     }
 
     .container {
@@ -57,6 +58,7 @@
       align-items: center;
       justify-content: center;
       border: 2px solid rgba(255, 255, 255, 0.3);
+      flex-shrink: 0;
     }
 
     .header-text {
@@ -64,13 +66,13 @@
     }
 
     .header-text h1 {
-      font-size: 2.5rem;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
       margin-bottom: 0.5rem;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .header-text p {
-      font-size: 1.2rem;
+      font-size: clamp(1rem, 2vw, 1.2rem);
       opacity: 0.9;
     }
 
@@ -85,7 +87,7 @@
 
     .form-container {
       background-color: white;
-      padding: 2rem;
+      padding: clamp(1rem, 4vw, 2rem);
       border-radius: 8px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
@@ -95,6 +97,7 @@
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
       border-bottom: 2px solid #eee;
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
     }
 
     .form-group {
@@ -106,15 +109,16 @@
       margin-bottom: 0.5rem;
       color: var(--text-color);
       font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1rem);
     }
 
     textarea {
       width: 100%;
-      min-height: 200px;
+      min-height: clamp(150px, 30vh, 200px);
       padding: 1rem;
       border: 1px solid #ddd;
       border-radius: 4px;
-      font-size: 1rem;
+      font-size: clamp(0.9rem, 2vw, 1rem);
       transition: border-color 0.3s ease;
     }
 
@@ -128,8 +132,8 @@
       background-color: var(--accent-color);
       color: white;
       border: none;
-      padding: 1rem 2rem;
-      font-size: 1.1rem;
+      padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
+      font-size: clamp(1rem, 2vw, 1.1rem);
       border-radius: 4px;
       cursor: pointer;
       width: 100%;
@@ -142,9 +146,24 @@
 
     .privacy-notice {
       margin-top: 1.5rem;
-      font-size: 0.9rem;
+      font-size: clamp(0.8rem, 2vw, 0.9rem);
       color: #666;
       text-align: center;
+    }
+
+    .loading-indicator {
+      display: none;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    form.submitting .loading-indicator {
+      display: block;
+    }
+
+    form.submitting .submit-button {
+      opacity: 0.7;
+      cursor: not-allowed;
     }
 
     @media (max-width: 768px) {
@@ -156,12 +175,25 @@
         flex-direction: column;
       }
 
-      .header-text h1 {
-        font-size: 2rem;
+      .logo-placeholder {
+        width: 80px;
+        height: 80px;
+      }
+
+      .anonymous-notice {
+        padding: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-placeholder {
+        width: 60px;
+        height: 60px;
       }
 
       .form-container {
-        padding: 1.5rem;
+        padding: 1rem;
       }
     }
   </style>
@@ -191,7 +223,9 @@
     <div class="form-container">
       <h2 class="form-title">Escribe tu reclamo, inquietud o denuncia</h2>
       
-      <form action="https://formspree.io/f/mjkgzbpr" method="POST">
+      <form action="https://formspree.io/f/mjkgzbpr" method="POST" id="denunciaForm">
+        <input type="hidden" name="_next" value="https://policiachaco.gob.ar/gracias" />
+        
         <div class="form-group">
           <label for="denuncia">Su reclamo o denuncia:</label>
           <textarea 
@@ -203,6 +237,10 @@
         </div>
 
         <button type="submit" class="submit-button">Enviar Reclamo Anónimo</button>
+        
+        <div class="loading-indicator">
+          Enviando su reclamo...
+        </div>
       </form>
 
       <div class="privacy-notice">
@@ -210,5 +248,14 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('denunciaForm').addEventListener('submit', function(e) {
+      this.classList.add('submitting');
+      const button = this.querySelector('.submit-button');
+      button.textContent = 'Enviando...';
+      button.disabled = true;
+    });
+  </script>
 </body>
 </html>
