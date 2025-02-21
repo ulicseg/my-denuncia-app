@@ -1,0 +1,13 @@
+{
+  "name": "denuncia-anonima",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "vercel build",
+    "start": "vercel start"
+  },
+  "dependencies": {
+    "nodemailer": "^6.7.2"
+  }
+}

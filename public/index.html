@@ -1,0 +1,56 @@
+<!-- /public/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Denuncia Anónima</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Denuncia Anónima</h1>
+        <form id="denunciaForm">
+            <label for="asunto">Asunto</label>
+            <input type="text" id="asunto" name="asunto" required>
+
+            <label for="problema">Problema</label>
+            <textarea id="problema" name="problema" rows="5" required></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+        <p id="responseMessage" style="text-align:center;"></p>
+    </div>
+
+    <script>
+        document.getElementById('denunciaForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evita el envío estándar del formulario
+
+            const asunto = document.getElementById('asunto').value;
+            const problema = document.getElementById('problema').value;
+
+            try {
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ asunto, problema }),
+                });
+
+                const result = await response.json();
+                const responseMessage = document.getElementById('responseMessage');
+                if (response.ok) {
+                    responseMessage.textContent = result.message;
+                    document.getElementById('denunciaForm').reset();
+                } else {
+                    responseMessage.textContent = result.error || 'Error al enviar la denuncia.';
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('responseMessage').textContent = 'Error de conexión.';
+            }
+        });
+    </script>
+</body>
+</html>
