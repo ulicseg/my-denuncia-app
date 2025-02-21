@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "vercel dev",
-    "build": "vercel build",
-    "start": "vercel start"
+    "dev": "node index.js",  // Puedes tener un comando dev para desarrollo local si lo necesitas
+    "build": "echo 'No build step required'"  // En proyectos estáticos no necesitas un build
   },
   "dependencies": {
     "nodemailer": "^6.7.2"
