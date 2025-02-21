@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
       service: 'gmail',
       auth: {
         user: 'sistemagestionlegislativo@gmail.com',    // Reemplaza con tu correo de Gmail
-        pass: 'toazjirkofftfvdw'           // Usa tu contraseña de aplicación o la normal
+        pass: 'sistemitaparatato11'           // Usa tu contraseña de aplicación o la normal
       }
     });
 
